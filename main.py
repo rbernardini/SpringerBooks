@@ -58,9 +58,9 @@ def downloadBook(book_url,category,urlbase,destination):
         download_link = content.select_one('a[data-track-action=\"Book download - pdf\"]').get_attribute_list('href')[0]
         if not os.path.exists(os.path.join(destination,category.replace('/','-'))):
             os.mkdir(os.path.join(destination,category.replace('/','-')))
-        if not os.path.exists(os.path.join(destination,category.replace('/','-'),'(' + authors.replace('/','_') +') ' + title.replace('/','_') +'.pdf')):
+        if not os.path.exists(os.path.join(destination,category.replace('/','-'),'(' + authors.replace('/','_') +') ' + (title.replace('/','_')).replace(':','_') +'.pdf')):
             r = requests.get(urlbase + download_link)
-            with open(os.path.join(destination,category.replace('/','-'),'(' + authors.replace('/','_') +') ' + title.replace('/','_') +'.pdf'),'wb') as f:
+            with open(os.path.join(destination,category.replace('/','-'),'(' + authors.replace('/','_') +') ' + (title.replace('/','_')).replace(':','_') +'.pdf'),'wb') as f:
                 f.write(r.content)
     except:
         pass
